@@ -1,4 +1,5 @@
-from tkinter import Frame, Label, Entry, Button, messagebox
+from ttkbootstrap import Window, Frame, Label, Entry,Button
+from ttkbootstrap.dialogs import Messagebox
 from BusinessLogicLayer.user_business_logic import UserBusinessLogic
 from PressentationLayer import main_view
 
@@ -39,7 +40,7 @@ class RegisterFrame(Frame):
         self.lastname_entry = Entry(self)
         self.lastname_entry.grid(row=4, column=1, pady=(0, 10), padx=(0, 20), sticky="ew")
 
-        self.register_button = Button(self, text="Register", command=self.register)
+        self.register_button = Button(self, text="Register",command=self.register, bootstyle="success")
         self.register_button.grid(row=5, column=1, pady=(0, 10), padx=(0, 20))
 
     def register(self):
@@ -50,6 +51,7 @@ class RegisterFrame(Frame):
 
         result = self.user_business_logic.Register_user(username, password, first_name, last_name)
         if result.success:
-            messagebox.showinfo("Success", "user registered successfully!")
+            Messagebox.showinfo("Success",
+                                "user registered successfully! wait until your account update to active by Admin")
         else:
-            messagebox.showerror("Error", result.message)
+            Messagebox.showerror("Error", result.message)

@@ -1,5 +1,7 @@
-from tkinter import Frame, Label, Button, messagebox
 from tkinter.ttk import Treeview
+from ttkbootstrap import Window, Frame, Label, Entry, Button
+from ttkbootstrap.dialogs import Messagebox
+# import ttkbootstrap.treeview
 from BusinessLogicLayer.user_business_logic import UserBusinessLogic
 
 
@@ -18,10 +20,10 @@ class UserManagementFrame(Frame):
         self.header_label = Label(self, text="User Management Form")
         self.header_label.grid(row=0, column=0, padx=10, pady=10)
 
-        self.active_button = Button(self, text="Active", command=self.active)
+        self.active_button = Button(self, text="Active", command=self.active,bootstyle="success")
         self.active_button.grid(row=1, column=0, pady=(0, 10), padx=10, sticky="w")
 
-        self.deactive_button = Button(self, text="Deactive", command=self.deactive)
+        self.deactive_button = Button(self, text="Deactive", command=self.deactive,bootstyle="danger")
         self.deactive_button.grid(row=1, column=1, pady=(0, 10), padx=10, sticky="e")
 
         self.back_button = Button(self, text="Back", command=self.go_back)
@@ -75,11 +77,9 @@ class UserManagementFrame(Frame):
         result = self.user_business.get_user_list(self.current_user)
 
         if result.success:
-            self.load_data(result.data)
+            self.load_data(result.data.data)
         else:
-            messagebox.showerror("Error", result.message)
+            Messagebox.showerror("Error", result.message)
 
     def go_back(self):
         self.main_view.switch_frame("home")
-
-

@@ -1,4 +1,4 @@
-from tkinter import Frame, Label, Button
+from ttkbootstrap import Window, Frame, Label, Entry, Button
 
 
 class HomeFrame(Frame):
@@ -12,16 +12,16 @@ class HomeFrame(Frame):
         self.welcome_label = Label(self)
         self.welcome_label.grid(row=0, column=0, pady=10)
 
-        self.logout_button = Button(self, text="Logout", command=self.logout)
+        self.logout_button = Button(self, text="Logout",bootstyle="danger", command=self.logout)
         self.logout_button.grid(row=1, column=0, pady=(0, 10), padx=20, sticky="ew")
 
         self.user_management_button = None
 
     def set_current_user(self, current_user):
-        self.current_user=current_user
+        self.current_user = current_user
         self.welcome_label.config(text=f"Welcome {current_user.get_fullname()}")
 
-        self.user_management_button = Button(self, text="User Management", command=self.go_to_user_management)
+        self.user_management_button = Button(self, text="User Management",bootstyle="warning", command=self.go_to_user_management)
         if current_user.show_role_title() == "Admin":
             self.user_management_button.grid(row=2, column=0, pady=(0, 10), padx=20, sticky="ew")
         else:

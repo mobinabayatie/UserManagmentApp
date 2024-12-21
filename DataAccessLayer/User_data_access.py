@@ -51,9 +51,9 @@ class UserDataAccess:
         with sqlite3.connect(database_name) as connection:
             cursor = connection.cursor()
             cursor.execute(f"""
-             INSERT INTO User(first_name,last_name,username,password)
-             VALUES(?,?,?,?)
-            """, (user.first_name, user.last_name, user.username, user.password))
+             INSERT INTO User(first_name,last_name,username,password,is_active)
+             VALUES(?,?,?,?,0)
+            """, (user.first_name, user.last_name, user.username, user.password_hash))
             connection.commit()
 
     def get_user_list(self, user_id):
